@@ -31,8 +31,11 @@ def checkNum(num, rand):
 
 #This is the MAIN code block of the game
 def play():
+      #Local Variables for the game (Created each time they play)
       r = random.randint(0,100)
       lives = 7
+      
+      #Main game loop
       while(lives>0):
             ans = guess()
             if(checkNum(ans, r)):   #The condition IS the output of CheckNum
@@ -41,6 +44,7 @@ def play():
                   lives = lives - 1
                   print("You have " + str(lives) + " lives left.")
 
+      #Game ended....ask user to play again or exit
       choice = input("Play again?")
       choice = choice.lower()  #Take all the letters in the string and makes them lowecase
       if(choice in choices):
