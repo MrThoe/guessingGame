@@ -1,5 +1,8 @@
 """
-Enter your heading here
+My Python Guessing Game Example
+@Author: Allen Thoe
+@Param: num, rand, choice
+Date: 8/21/2019
 """
 
 
@@ -39,9 +42,11 @@ def play():
                   print("You have " + str(lives) + " lives left.")
 
       choice = input("Play again?")
-      if(choice == "yes"):
+      choice = choice.lower()  #Take all the letters in the string and makes them lowecase
+      if(choice in choices):
             play()
       else:
             print("Have a good day!")
 
+choices = {"yes", "yuss" , "ya", "yeah", "sure", "ok" , "y", "yea"} #List of all possible choices to play again           
 play()
