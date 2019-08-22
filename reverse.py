@@ -10,9 +10,9 @@ import random
 
 #Start the game byt explaining how to play to the user
 def greet():
-      print(" Think of a number between 1-100 and \n I will try and guess it")
+      print(" Think of a number I will try and guess it")
       print("Use the following codes to let me know how my guess is: ")
-      print(" 1 = Too Low \n 2 = Too HIGH \n 3 = YOU GOT IT!")
+      print(" 1 = 'Too Low' \n 2 = 'Too HIGH' \n 3 = 'YOU GOT IT!'")
 
 #Systematically guess by taking the middle of the low and high bound. 
 def guess(low, high):
@@ -26,12 +26,35 @@ def checkNum(n):
       check = int(input("Am I right? "))
       return check
 
+#Get the low and high numbers from the user
+def getLow():
+      try:
+            l = int(input("Please enter the LOWER bound for the game: "))
+            return l
+      except:
+            print("I'm sorry, that's not a valid response. \nPlease try again.")
+            return getLow()
+
+def getHigh(theLow):
+      try:
+            l = int(input("Now for the UPPER bound for the game: "))
+            if(l <= theLow):
+                  print("That makes no sense, please choose a number greater than the LOWER bound.")
+                  return getHigh(theLow)
+            else:
+                  return l
+      except:
+            print("I'm sorry, that's not a valid response. \nPlease try again.")
+            return getHigh(theLow)
+      
+
 #Main game loop
 def play():
 
       greet()
-      low = 0
-      high = 100
+      low = getLow()
+      high = getHigh(low)
+
       while(True):
             g = guess(low, high)
             c = checkNum(g)
@@ -39,10 +62,21 @@ def play():
                   low = g
             elif(c==2):
                   high = g
-            else:
+            elif(c==3):
                   print("Sweet!  I win ;) ")
                   break
-      
+            else:
+                  print("That is not one of the choices....")
+                  print("I can only understand '1','2', or '3'")
+                  print("To let me know how my guess is use these codes...")
+                  print(" 1 = 'Too Low' \n 2 = 'Too HIGH' \n 3 = 'YOU GOT IT!'")
 
-choices = {"yes", "yuss" , "ya", "yeah", "sure", "ok" , "y", }           
+      #Replay?
+      ans = input("Should we play again? \n")
+      if(ans in choices):
+            play()
+      else:
+            print("Ok good bye, thanks for playing ; )")
+            
+choices = {"yes", "yuss" , "ya", "yeah", "sure", "ok" , "y", "please" , "uh-huh"}           
 play()
